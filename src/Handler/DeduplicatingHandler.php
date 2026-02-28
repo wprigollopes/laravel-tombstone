@@ -12,9 +12,9 @@ use Scheb\Tombstone\Logger\Handler\HandlerInterface;
 class DeduplicatingHandler implements HandlerInterface
 {
     public function __construct(
-        private HandlerInterface $innerHandler,
-        private int $ttl = 3600,
-        private ?string $store = null,
+        private readonly HandlerInterface $innerHandler,
+        private readonly int $ttl = 3600,
+        private readonly ?string $store = null,
     ) {
     }
 

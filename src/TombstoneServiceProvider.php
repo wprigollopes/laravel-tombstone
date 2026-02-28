@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Wprigollopes\LaravelTombstone;
 
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Support\ServiceProvider;
 use Scheb\Tombstone\Logger\Graveyard\GraveyardBuilder;
@@ -25,7 +26,7 @@ class TombstoneServiceProvider extends ServiceProvider
             return;
         }
 
-        $this->app->singleton(GraveyardInterface::class, function ($app) {
+        $this->app->singleton(GraveyardInterface::class, function (Application $app): GraveyardInterface {
             $config = $app['config']->get('tombstone');
 
             $handler = $this->buildHandler($config);
@@ -73,9 +74,7 @@ class TombstoneServiceProvider extends ServiceProvider
             // Register terminate middleware
             if ($this->app->bound(Kernel::class)) {
                 $kernel = $this->app->make(Kernel::class);
-                if (method_exists($kernel, 'pushMiddleware')) {
-                    $kernel->pushMiddleware(FlushTombstones::class);
-                }
+                $kernel->pushMiddleware(FlushTombstones::class);
             }
         }
 
@@ -86,6 +85,7 @@ class TombstoneServiceProvider extends ServiceProvider
         }
     }
 
+    /** @param array<string, mixed> $config */
     private function buildHandler(array $config): HandlerInterface
     {
         return match ($config['handler'] ?? 'analyzer_log') {
@@ -94,6 +94,7 @@ class TombstoneServiceProvider extends ServiceProvider
         };
     }
 
+    /** @param array<string, mixed> $config */
     private function buildAnalyzerLogHandler(array $config): AnalyzerLogHandler
     {
         $logConfig = $config['analyzer_log'] ?? [];
@@ -106,6 +107,7 @@ class TombstoneServiceProvider extends ServiceProvider
         );
     }
 
+    /** @param array<string, mixed> $config */
     private function buildLogChannelHandler(array $config): PsrLoggerHandler
     {
         $channelConfig = $config['log_channel'] ?? [];

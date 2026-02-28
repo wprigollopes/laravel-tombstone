@@ -85,6 +85,7 @@ class TombstoneReportCommand extends Command
         return self::SUCCESS;
     }
 
+    /** @return array<string, mixed> */
     private function buildAnalyzerConfig(): array
     {
         $tombstoneConfig = config('tombstone');

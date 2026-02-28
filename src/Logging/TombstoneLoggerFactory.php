@@ -10,6 +10,7 @@ use Monolog\Logger;
 
 class TombstoneLoggerFactory
 {
+    /** @param array<string, mixed> $config */
     public function __invoke(array $config): Logger
     {
         $logger = new Logger('tombstone');
