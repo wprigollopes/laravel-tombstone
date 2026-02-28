@@ -18,7 +18,10 @@
     "autoload": {
         "psr-4": {
             "Wprigollopes\\LaravelTombstone\\": "src/"
-        }
+        },
+        "files": [
+            "vendor/scheb/tombstone/src/logger/tombstone-function.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
