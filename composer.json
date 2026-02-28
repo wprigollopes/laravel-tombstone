@@ -1,0 +1,37 @@
+{
+    "name": "wprigollopes/laravel-tombstone",
+    "description": "Laravel wrapper for scheb/tombstone - dead code detection made easy",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": "^8.2",
+        "scheb/tombstone": "^1.10",
+        "illuminate/support": "^11.0|^12.0",
+        "illuminate/cache": "^11.0|^12.0",
+        "illuminate/console": "^11.0|^12.0",
+        "illuminate/config": "^11.0|^12.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^9.0|^10.0",
+        "phpunit/phpunit": "^11.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Wprigollopes\\LaravelTombstone\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Wprigollopes\\LaravelTombstone\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Wprigollopes\\LaravelTombstone\\TombstoneServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
