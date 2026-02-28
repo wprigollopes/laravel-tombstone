@@ -2,6 +2,14 @@
 
 A Laravel wrapper for [scheb/tombstone](https://github.com/scheb/tombstone) that makes dead code detection effortless. Install, place markers, deploy, and discover what's actually unused.
 
+## Background
+
+I first used `scheb/tombstone` a few years ago on a legacy codebase that had grown organically over a long time. Setting it up back then was not trivial — the project had no framework conventions to lean on, configuration was manual, and wiring the logging and reporting required a fair amount of glue code. But once it was running, it worked beautifully. Tombstones revealed entire modules that hadn't been touched in months, jobs that were never dispatched, and API endpoints that no client had called in over a year. We removed thousands of lines with confidence.
+
+The tombstone methodology proved itself then, and it remains just as relevant today. Modern static analysis tools like PHPStan, Psalm, and Larastan are excellent at catching unreferenced code, type mismatches, and structural issues. But they operate on what the code *could* do, not what it *actually does* at runtime. A controller method that's properly type-hinted and referenced in a route file will pass every static analysis check — even if no request has hit that route in six months.
+
+With Laravel's rise as the dominant PHP framework, most new projects and many migrated ones follow its conventions. That creates an opportunity: a package that integrates tombstone detection natively into Laravel, respecting its service provider lifecycle, configuration system, caching layer, and artisan commands. Instead of the manual setup I went through years ago, the goal here is `composer require` and you're ready to go — even on complex, large-scale applications with thousands of routes, dozens of jobs, and years of accumulated code.
+
 ## The Problem
 
 Static analysis tools can tell you when a function isn't referenced anywhere in your codebase. But in real-world Laravel applications, code can be "alive" in the IDE and "dead" in production:
