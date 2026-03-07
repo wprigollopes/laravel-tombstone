@@ -22,7 +22,7 @@
             "Wprigollopes\\LaravelTombstone\\": "src/"
         },
         "files": [
-            "vendor/scheb/tombstone/src/logger/tombstone-function.php"
+            "src/tombstone-bootstrap.php"
         ]
     },
     "autoload-dev": {
